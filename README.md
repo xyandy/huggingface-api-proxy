@@ -88,7 +88,8 @@ callOpenAI();
 比如：
 
 - Qwen/Qwen2.5-72B-Instruct
-- google/gemma-2-27b-it
+- meta-llama/Llama-3.2-11B-Vision-Instruct
+- microsoft/Phi-3.5-mini-instruct
 
 # 限制
 
