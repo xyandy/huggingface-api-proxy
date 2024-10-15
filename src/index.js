@@ -31,7 +31,7 @@ async function handleRequest(request) {
 		const messages = data.messages || [];
 		const model = data.model;
 		const temperature = data.temperature || 0.6;
-		const max_tokens = data.max_tokens || 8196;
+		const max_tokens = data.max_tokens || 8192;
 		const top_p = Math.min(Math.max(data.top_p || 0.9, 0.0001), 0.9999);
 		const stream = data.stream || false;
 

@@ -14,24 +14,24 @@
 
 ```shell
 # shell curl
-curl https://{baseurl}/v1/chat/completions \
+curl https://huggingface-api-proxy.dogxy.workers.dev/v1/chat/completions \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer {huggingface-api-key}" \
+  -H "Authorization: Bearer your-api-key" \
   -d '{
     "model": "Qwen/Qwen2.5-72B-Instruct",
     "messages": [{"role": "user", "content": "Hi, who are you"}],
     "temperature": 0.6
   }'
+
 ```
 
 ```python
 # python
-import openai
 from openai import OpenAI
 
 client = OpenAI(
-    base_url={baseurl},
-    api_key={huggingface-api-key}
+    base_url="https://huggingface-api-proxy.dogxy.workers.dev/v1/chat/completions",
+    api_key="your-api-key"
 )
 
 try:
@@ -49,29 +49,32 @@ except Exception as e:
 
 ```javascript
 // javascript
-try {
-	const response = await fetch('https://{baseurl}/v1/chat/completions', {
-		method: 'POST',
-		headers: {
-			Authorization: `Bearer {huggingface-api-key}`,
-			'Content-Type': 'application/json',
-		},
-		body: JSON.stringify({
-			model: 'Qwen/Qwen2.5-72B-Instruct',
-			messages: [{ role: 'user', content: 'Hi, who are you' }],
-			temperature: 0.7,
-		}),
-	});
+const axios = require('axios');
 
-	if (!response.ok) {
-		throw new Error(`HTTP error! status: ${response.status}`);
+async function callOpenAI() {
+	try {
+		const response = await axios.post(
+			'https://huggingface-api-proxy.dogxy.workers.dev/v1/chat/completions',
+			{
+				model: 'Qwen/Qwen2.5-72B-Instruct',
+				messages: [{ role: 'user', content: 'Hi, who are you' }],
+				temperature: 0.7,
+			},
+			{
+				headers: {
+					Authorization: `Bearer your-api-key`,
+					'Content-Type': 'application/json',
+				},
+			}
+		);
+
+		console.log(response.data.choices[0].message.content);
+	} catch (error) {
+		console.error('Error:', error.response.data);
 	}
-
-	const data = await response.json();
-	console.log(data.choices[0].message.content);
-} catch (error) {
-	console.error('Error:', error.message);
 }
+
+callOpenAI();
 ```
 
 # 部署
@@ -81,6 +84,11 @@ try {
 # 可用模型
 
 参考 https://huggingface.co/docs/api-inference/supported-models
+
+比如：
+
+- Qwen/Qwen2.5-72B-Instruct
+- google/gemma-2-27b-it
 
 # 限制
 
