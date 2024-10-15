@@ -30,7 +30,7 @@ curl https://huggingface-api-proxy.dogxy.workers.dev/v1/chat/completions \
 from openai import OpenAI
 
 client = OpenAI(
-    base_url="https://huggingface-api-proxy.dogxy.workers.dev/v1/chat/completions",
+    base_url="https://huggingface-api-proxy.dogxy.workers.dev/v1",
     api_key="your-api-key"
 )
 
