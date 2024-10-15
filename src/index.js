@@ -43,6 +43,7 @@ async function handleRequest(request) {
 			top_p: top_p,
 			messages: messages,
 		};
+		console.log(`[${new Date().toString()}] body: ${requestBody}, authHeader: ${authHeader}`);
 
 		const apiUrl = `https://api-inference.huggingface.co/models/${model}/v1/chat/completions`;
 		const response = await fetch(apiUrl, {
